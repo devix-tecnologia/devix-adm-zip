@@ -1,7 +1,7 @@
 {
   "name": "sidartaveloso-adm-zip",
   "version": "0.5.15",
-  "description": "Javascript implementation of zip for nodejs with support for electron original-fs. Allows user to create or extract zip files both in memory or to/from disk",
+  "description": "Força gerar versao! Javascript implementation of zip for nodejs with support for electron original-fs. Allows user to create or extract zip files both in memory or to/from disk",
   "scripts": {
     "test": "mocha -R spec",
     "test:format": "npm run format:prettier:raw -- --check",
