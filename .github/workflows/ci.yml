@@ -1,17 +1,18 @@
-name: Linux build
+name: CI - Build and Release
 
 on:
   push:
+    branches: ['main']
   pull_request:
+    branches: ['main']
 
 jobs:
   build:
-    name: Node ${{ matrix.node-version }}
+    name: Node ${{ matrix.node-version }} - Build and Release
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        # mocha nolonger supports node 10
         node-version: [12.x, 14.x, 16.x, 18.x, 20.x, 21.x]
 
     steps:
@@ -23,10 +24,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install
-        run: |
-          npm install
+      - name: Install dependencies
+        run: npm install
 
-      - name: Run Tests
-        run: |
-          npm test
+      - name: Run tests
+        run: npm test
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
